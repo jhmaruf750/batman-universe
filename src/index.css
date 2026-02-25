@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@400;700;900&family=Poppins:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Hind Siliguri", "Poppins", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Hind Siliguri", "Space Grotesk", sans-serif;
+  
+  --color-batman-black: #050505;
+  --color-batman-blue: #0a0b1e;
+  --color-batman-purple: #1a0b2e;
+  --color-neon-purple: #bc13fe;
+  --color-neon-blue: #00d2ff;
+  
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow: glow 2s ease-in-out infinite alternate;
+  --animate-scan: scan 3s linear infinite;
+  --animate-shake: shake 0.2s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  @keyframes glow {
+    from { text-shadow: 0 0 10px #bc13fe, 0 0 20px #bc13fe; }
+    to { text-shadow: 0 0 20px #00d2ff, 0 0 30px #00d2ff; }
+  }
+  @keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-batman-black text-white selection:bg-neon-purple/30 overflow-x-hidden;
+    font-family: var(--font-sans);
+    background: radial-gradient(circle at 50% 50%, var(--color-batman-purple) 0%, var(--color-batman-black) 100%);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl;
+  }
+  .neon-border {
+    @apply border border-neon-purple/50 shadow-[0_0_15px_rgba(188,19,254,0.3)];
+  }
+  .neon-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-neon-purple to-neon-blue;
+  }
+
+  /* Dropdown Styling */
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2em;
+    padding-right: 2.5rem;
+  }
+
+  select option {
+    background-color: #050505;
+    color: white;
+    padding: 12px;
+    font-family: "Hind Siliguri", sans-serif;
+  }
+
+  select:focus {
+    box-shadow: 0 0 15px rgba(188, 19, 254, 0.3);
+  }
+}
+
+/* Custom Cursor Glow */
+.cursor-glow {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(188,19,254,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+}
